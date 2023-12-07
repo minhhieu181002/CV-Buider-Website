@@ -70,7 +70,7 @@ echo "
           <p><strong>Phone:</strong> $phone </p>
           <h2>Skills</h2>
           <ul>
-            <li>$skillArr</li>
+            <li>$skill</li>
             
           </ul>
           
