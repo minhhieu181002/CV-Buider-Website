@@ -25,7 +25,7 @@ $sql = "SELECT mail, name, full_name FROM resumes WHERE userId = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param('i', $userId);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->get_result(); 
 
 // Check if there are any resumes
 if ($result->num_rows > 0) {
@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
         echo '<h5 class="card-title">Name Of CV: ' . $row['name'] . '</h5>';
         echo '<h6 class="card-subtitle mb-2 text-muted">Full Name: ' . $row['full_name'] . '</h6>';
         echo '<p class="card-text">Email: ' . $row['mail'] . '</p>';
-        echo '<a href="printCV1.php" class="btn btn-primary">Choose Template 1</a>'; // Add the "Choose Template" button
+        echo '<a href="printCV1.php" class="btn btn-primary mr-3">Choose Template 1</a>'; // Add the "Choose Template" button
         echo '<a href="printCV2.php" class="btn btn-primary">Choose Template 2</a>'; // Add the "Choose Template" button
         echo '</div>';
         echo '</div>';
