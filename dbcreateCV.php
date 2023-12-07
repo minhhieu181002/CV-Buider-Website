@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
 }
 
 // Database connection
-$mysqli = new mysqli("localhost", "root", "", "WebAss");
+$mysqli = new mysqli("localhost", "root", "", "webass");
 
 // Check if the connection was successful
 if ($mysqli->connect_error) {
