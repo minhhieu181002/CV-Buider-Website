@@ -31,7 +31,7 @@ if ($mysqli->query($sql) === TRUE) {
     echo "Error creating table: " . $mysqli->error;
 }
 
-// Create table "resumes" with userId column as a foreign key
+// Create table "resumes"
 $sql = "CREATE TABLE IF NOT EXISTS resumes (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     userId INT(11) UNSIGNED,
@@ -44,13 +44,39 @@ $sql = "CREATE TABLE IF NOT EXISTS resumes (
     phone_number TEXT NOT NULL,
     certificate TEXT,
     mail VARCHAR(255) NOT NULL,
-    experience TEXT,
-    education TEXT,
     skill TEXT,
     FOREIGN KEY (userId) REFERENCES users(id)
 )";
 if ($mysqli->query($sql) === TRUE) {
     echo "Table resumes created successfully <br>";
+} else {
+    echo "Error creating table: " . $mysqli->error;
+}
+
+// Create table "education"
+$sql = "CREATE TABLE IF NOT EXISTS education (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    resume_id INT(11) UNSIGNED,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    FOREIGN KEY (resume_id) REFERENCES resumes(id)
+)";
+if ($mysqli->query($sql) === TRUE) {
+    echo "Table education created successfully <br>";
+} else {
+    echo "Error creating table: " . $mysqli->error;
+}
+
+// Create table "experience"
+$sql = "CREATE TABLE IF NOT EXISTS experience (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    resume_id INT(11) UNSIGNED,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    FOREIGN KEY (resume_id) REFERENCES resumes(id)
+)";
+if ($mysqli->query($sql) === TRUE) {
+    echo "Table experience created successfully <br>";
 } else {
     echo "Error creating table: " . $mysqli->error;
 }

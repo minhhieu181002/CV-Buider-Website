@@ -14,12 +14,9 @@ include 'header.php';
 <body>
     <?php
     if (session_status() === PHP_SESSION_NONE) {
-        // There is no active session, start a new one
         session_start();
     }
 
-
-    // Check if the user is not logged in
     if (!isset($_SESSION['id'])) {
         header("Location: index.php?page=login");
         exit();
@@ -72,11 +69,23 @@ include 'header.php';
             </div>
             <div class="mb-3">
                 <label for="experience" class="form-label">Experience<span class="text-danger">*</span></label>
-                <textarea class="form-control form-control-sm" id="experience" name="experience" rows="4" required></textarea>
+                <div id="experienceFields">
+                    <div class="experienceField">
+                        <input type="text" class="form-control form-control-sm mb-2" name="experience_title[]" placeholder="Title" required>
+                        <textarea class="form-control form-control-sm mb-2" name="experience_description[]" placeholder="Description" rows="2" required></textarea>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-link" onclick="addExperienceField()">+ Add another experience</button>
             </div>
             <div class="mb-3">
                 <label for="education" class="form-label">Education<span class="text-danger">*</span></label>
-                <textarea class="form-control form-control-sm" id="education" name="education" rows="4" required></textarea>
+                <div id="educationFields">
+                    <div class="educationField">
+                        <input type="text" class="form-control form-control-sm mb-2" name="education_title[]" placeholder="Title" required>
+                        <textarea class="form-control form-control-sm mb-2" name="education_description[]" placeholder="Description" rows="2" required></textarea>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-link" onclick="addEducationField()">+ Add another education</button>
             </div>
             <div class="mb-3">
                 <label for="skill" class="form-label">Skill<span class="text-danger">*</span></label>
@@ -88,7 +97,27 @@ include 'header.php';
         </form>
     </div>
     <script>
-        // uploadImage function
+        function addEducationField() {
+            const container = document.getElementById('educationFields');
+            const newField = document.createElement('div');
+            newField.classList.add('educationField');
+            newField.innerHTML = `
+                <input type="text" class="form-control form-control-sm mb-2" name="education_title[]" placeholder="Title" required>
+                <textarea class="form-control form-control-sm mb-2" name="education_description[]" placeholder="Description" rows="2" required></textarea>
+            `;
+            container.appendChild(newField);
+        }
+
+        function addExperienceField() {
+            const container = document.getElementById('experienceFields');
+            const newField = document.createElement('div');
+            newField.classList.add('experienceField');
+            newField.innerHTML = `
+                <input type="text" class="form-control form-control-sm mb-2" name="experience_title[]" placeholder="Title" required>
+                <textarea class="form-control form-control-sm mb-2" name="experience_description[]" placeholder="Description" rows="2" required></textarea>
+            `;
+            container.appendChild(newField);
+        }
         const uploadImage = async (image) => {
             try {
                 const formDataToUpload = new FormData();
@@ -111,7 +140,6 @@ include 'header.php';
             }
         }
 
-        // Form submission handling
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.querySelector('form');
             form.addEventListener('submit', async function(e) {

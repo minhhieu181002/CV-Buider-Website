@@ -30,44 +30,7 @@ if($result->num_rows > 0){
         $education = $row['education'];
         $skill = $row['skill'];
 
-        $certificateArr = Array();
-        $skillArr = Array();
-        $education = Array();
-        $expArr = Array();
-
-
-        $linesCertificate = explode("\n", $row['certificate']);
         
-        // store each line separately
-        $i = 0;
-        foreach ($linesCertificate as $line) {
-                $certificateArr[$i] = $line;
-                //echo "\n$certificateArr[$i]" ;
-                $i+= 1;
-            }
-        $linesSkillArr = explode("\n", $row['skill']);
-        $x = 0;
-        foreach ($linesSkillArr as $line) {
-            $skillArr[$x] = $line;
-            //echo "$skillArr[$x]";
-            $x+= 1;
-        }
-
-        $linesEducation = explode("\n", $row['education']);
-        $j = 0;
-        foreach ($linesEducation as $line) {
-            $education[$j] = $line;
-            //echo "$education[$j]";
-            $j+= 1;
-        }
-
-        $linesExperience = explode("\n", $row['experience']);
-        $e = 0;
-        foreach ($linesExperience as $line) {
-            $expArr[$e] = $line;
-            //echo "$education[$j]";
-            $e+= 1;
-        }
         
     }
 }
@@ -107,22 +70,16 @@ echo "
           <p><strong>Phone:</strong> $phone </p>
           <h2>Skills</h2>
           <ul>
-            <li>$skillArr[0]</li>
-            <li>$skillArr[1]</li>
-            <li>$skillArr[2]</li>
+            <li>$skillArr</li>
+            
           </ul>
           
         </div>
 
         <div class='right'>
             <h2>Education</h2>
-            <h3>$education[0] </h3>
-            <p>University of XYZ, 2014-2018</p>
-            <br />
-            <h3>$education[1]</h3>
-            <p>University of XYZ, 2019-2020</p>
-            <h2>Work Experience</h2>
-            <h3>$expArr[0]</h3>
+            <h3>$education </h3>
+            
           <p><strong>Position:</strong> Software Developer</p>
           <p><strong>Duration:</strong> 2018-2022</p>
           <ul>
@@ -134,16 +91,8 @@ echo "
           
           </ul>
           <br />
-          <h3>$expArr[1]</h3>
-          <p><strong>Position:</strong> Web Developer</p>
-          <p><strong>Duration:</strong> 2016-2018</p>
-          <ul>
-            <li>
-              Created and maintained websites using HTML, CSS, and JavaScript
-            </li>
+          <h3$experience</h3>
           
-          
-          </ul>
         </div>
       </div>
       

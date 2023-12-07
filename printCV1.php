@@ -112,6 +112,7 @@ echo "<!DOCTYPE html>
           $intro
         </div>
         <div class='experience'>
+<<<<<<< HEAD
   <h2>Education</h2>
   <div class='item'>
     <h4>Degree and Certificate</h4>
@@ -132,34 +133,38 @@ echo "<!DOCTYPE html>
   </ul>
 </div>
 
+=======
+          <h2>Education</h2>
+  
+          <div class='item'>
+            <h4>Degree and Certificate</h4>
+            <div class='des'>
+              <ul>
+                <li>$certificate</li>
+              
+              </ul>
+            </div>
+          </div>
+  
+          
+          <h2 class='skills'>Pofessional Skills</h2>
+          <ul>
+            <li>$skill</li>
+          
+          </ul>
+        </div>
+>>>>>>> 00804768f1f4f01da982fd981369da5dabd82c07
         <div class='project'>
           <h2>EXPERIENCE</h2>
           <div class='item'>
-            <h4>Company 1</h4>
-            <div class='time'>2018-2019</div>
-            <div class='location'>$expArr[0]</div>
-            <div class='des'>
-                description
-            </div>
+            <h4>$experience</h4>
+            
+            
           </div>
   
-          <div class='item'>
-            <h4>Company 2</h4>
-            <div class='time'>2019-2021</div>
-            <div class='location'>$expArr[1]</div>
-            <div class='des'>
-              description
-            </div>
-          </div>
+        
   
-          <div class='item'>
-            <h4>Company 3</h4>
-            <div class='time'>2021-2023</div>
-            <div class='location'>$expArr[2]</div>
-            <div class='des'>
-              description
-            </div>
-          </div>
+          
         </div>
         
       </div>
@@ -173,4 +178,3 @@ echo "<!DOCTYPE html>
   </body>
   
   "
-?>
