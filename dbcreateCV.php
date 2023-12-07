@@ -1,63 +1,52 @@
-<?php 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mydb";
-//Create connection
-$conn = new mysqli($servername,$username,$password,$dbname);
-if($conn->connect_error){
-    die("Connection failed: ".$conn->connect_error);
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['id'])) {
+    // Redirect to the login page or perform any necessary action
+    header("Location: login.php");
+    exit();
 }
 
-//insert into UserResume Table (usermail, resumename)
-$cvname = $_POST['cvname'];
-$mail = $_POST['mail'];
-$sql="INSERT INTO userresume (UserMail, ResumeName)
-VALUE ('$mail', '$cvname')
-";
-$conn->query($sql);
+// Database connection
+$mysqli = new mysqli("localhost", "root", "", "webass");
 
-//insert into General Table
-$fname = $_POST['fname'];
-$bday = $_POST['birthday'];
-$addr = $_POST['address'];
-$website = $_POST['website'];
-$skill = $_POST['skill'];
-$personalskill = $_POST['personalskill'];
-$experience = $_POST['experience'];
-$sql="INSERT INTO general (FullName, Birthday, Addr, Mail, Website, ResumeName)
-VALUE ('$fname', '$bday', '$addr', '$mail', '$website','$cvname')
-";
-$conn->query($sql);
-
-//insert into phone table
-foreach($_POST as $key => $value){
-    if(strpos($key, 'phoneNumber-')===0){
-        // array_push($phoneNumbers, $value);
-        $sql="INSERT INTO phone (Mail, Phone, ResumeName) VALUE ('$mail','$value','$cvname')";
-        $conn->query($sql);
-    }
+// Check if the connection was successful
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
 }
 
-//insert into CerDeg table
-foreach($_POST as $key => $value){
-    if(strpos($key, 'CerDeg-')===0){
-        // array_push($phoneNumbers, $value);
-        $sql="INSERT INTO cerdeg (Mail, CerDeg, ResumeName) VALUE ('$mail','$value','$cvname')";
-        $conn->query($sql);
-    }
+// Collect data from the form
+$userId = $_SESSION['id']; // Get the userId from the session
+$name = $_POST["name"];
+$fullName = $_POST["full_name"];
+$dateOfBirth = $_POST["date_of_birth"];
+$address = $_POST["address"];
+$introduction = $_POST["introduction"];
+$phoneNumber = $_POST["phone_number"];
+$certificate = $_POST["certificate"];
+$mail = $_POST["mail"];
+$experience = $_POST["experience"];
+$education = $_POST["education"];
+$skill = $_POST["skill"];
+
+// Prepare the SQL statement
+$sql = "INSERT INTO resumes (userId, name, full_name, date_of_birth, address, introduction, phone_number, certificate, mail, experience, education, skill)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+// Prepare and bind the SQL statement
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("isssssssssss", $userId, $name, $fullName, $dateOfBirth, $address, $introduction, $phoneNumber, $certificate, $mail, $experience, $education, $skill);
+
+// Execute the statement
+if ($stmt->execute()) {
+    echo "Resume added successfully!";
+    header("Location: index.php?page=homepage");
+} else {
+    echo "Error: " . $stmt->error;
 }
 
-
-
-//insert into professionalSkill table
-
-
-//insert into personalSkill table
-
-
-//insert into experience table
-$conn->close();
-header('location: CreateCv.php');
-exit;
-?>
+// Close the statement and database connection
+$stmt->close();
+$mysqli->close();
