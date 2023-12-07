@@ -104,14 +104,14 @@ include 'header.php';
                 <div class="row templates-list gy-5 gx-lg-5">
                     <div class="templates-item position-relative col-lg-6">
                         <div class="template-item-img mx-auto me-lg-0 position-relative">
-                            <img src="assets/images/Basic.jpg" alt="" class="img-fluid">
+                            <img src="picTem1.png" alt="" class="img-fluid">
                             <a href="resume.php" class="btn btn-lg btn-primary position-absolute choose-template-btn">Print CV</a>
                         </div>
                     </div>
 
                     <div class="templates-item position-relative col-lg-6">
                         <div class="template-item-img mx-auto ms-lg-0 position-relative">
-                            <img src="assets/images/College.jpg" alt="" class="img-fluid">
+                            <img src="picTem2.png" alt="" class="img-fluid">
                             <a href="#" class="btn btn-lg btn-primary position-absolute choose-template-btn">Print CV</a>
                         </div>
                     </div>
