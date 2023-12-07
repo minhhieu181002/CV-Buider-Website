@@ -24,49 +24,49 @@ if($result->num_rows > 0){
         $intro = $row['introduction'];
         $address = $row['address'];
         $phone = $row['phone_number'];
-        //$certificate = $row['certificate'];
+        $certificate = $row['certificate'];
         $mail = $row['mail'];
         $experience = $row['experience'];
         $education = $row['education'];
         $skill = $row['skill'];
 
-        $certificateArr = Array();
-        $skillArr = Array();
-        $education = Array();
-        $expArr = Array();
+        // $certificateArr = Array();
+        // $skillArr = Array();
+        // $education = Array();
+        // $expArr = Array();
 
-        $linesCertificate = explode("\n", $row['certificate']);
+        // $linesCertificate = explode("\n", $row['certificate']);
         
-        // store each line separately
-        $i = 0;
-        foreach ($linesCertificate as $line) {
-                $certificateArr[$i] = $line;
-                //echo "\n$certificateArr[$i]" ;
-                $i+= 1;
-            }
-        $linesSkillArr = explode("\n", $row['skill']);
-        $x = 0;
-        foreach ($linesSkillArr as $line) {
-            $skillArr[$x] = $line;
-            //echo "$skillArr[$x]";
-            $x+= 1;
-        }
+        // // store each line separately
+        // $i = 0;
+        // foreach ($linesCertificate as $line) {
+        //         $certificateArr[$i] = $line;
+        //         //echo "\n$certificateArr[$i]" ;
+        //         $i+= 1;
+        //     }
+        // $linesSkillArr = explode("\n", $row['skill']);
+        // $x = 0;
+        // foreach ($linesSkillArr as $line) {
+        //     $skillArr[$x] = $line;
+        //     //echo "$skillArr[$x]";
+        //     $x+= 1;
+        // }
 
-        $linesEducation = explode("\n", $row['education']);
-        $j = 0;
-        foreach ($linesEducation as $line) {
-            $education[$j] = $line;
-            //echo "$education[$j]";
-            $j+= 1;
-        }
+        // $linesEducation = explode("\n", $row['education']);
+        // $j = 0;
+        // foreach ($linesEducation as $line) {
+        //     $education[$j] = $line;
+        //     //echo "$education[$j]";
+        //     $j+= 1;
+        // }
 
-        $linesExperience = explode("\n", $row['experience']);
-        $e = 0;
-        foreach ($linesExperience as $line) {
-            $expArr[$e] = $line;
-            //echo "$education[$j]";
-            $e+= 1;
-        }
+        // $linesExperience = explode("\n", $row['experience']);
+        // $e = 0;
+        // foreach ($linesExperience as $line) {
+        //     $expArr[$e] = $line;
+        //     //echo "$education[$j]";
+        //     $e+= 1;
+        // }
         
     }
 }
@@ -119,9 +119,8 @@ echo "<!DOCTYPE html>
             <h4>Degree and Certificate</h4>
             <div class='des'>
               <ul>
-                <li>$certificateArr[0]</li>
-                <li>$certificateArr[1]</li>
-                <li>$certificateArr[2]</li>
+                <li>$certificate</li>
+              
               </ul>
             </div>
           </div>
@@ -129,39 +128,21 @@ echo "<!DOCTYPE html>
           
           <h2 class='skills'>Pofessional Skills</h2>
           <ul>
-            <li>$skillArr[0]</li>
-            <li>$skillArr[1]</li>
-            <li>$skillArr[2]</li>
+            <li>$skill</li>
+          
           </ul>
         </div>
         <div class='project'>
           <h2>EXPERIENCE</h2>
           <div class='item'>
-            <h4>Company 1</h4>
-            <div class='time'>2018-2019</div>
-            <div class='location'>$expArr[0]</div>
-            <div class='des'>
-                description
-            </div>
+            <h4>$experience</h4>
+            
+            
           </div>
   
-          <div class='item'>
-            <h4>Company 2</h4>
-            <div class='time'>2019-2021</div>
-            <div class='location'>$expArr[1]</div>
-            <div class='des'>
-              description
-            </div>
-          </div>
+        
   
-          <div class='item'>
-            <h4>Company 3</h4>
-            <div class='time'>2021-2023</div>
-            <div class='location'>$expArr[2]</div>
-            <div class='des'>
-              description
-            </div>
-          </div>
+          
         </div>
         
       </div>
