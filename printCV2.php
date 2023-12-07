@@ -84,7 +84,7 @@ echo "
       href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap'
       rel='stylesheet'
     />
-    <link rel='stylesheet' href='/Dang-Ass-Web/tem2/style2.css' />
+    <link rel='stylesheet' href='/tem2/style2.css' />
   </head>
   <body>
     <div class='container'>

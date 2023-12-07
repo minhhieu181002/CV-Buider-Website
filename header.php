@@ -1,35 +1,47 @@
 <?php
-    session_start();
-  if (!isset($_SESSION['id']) && (!isset($_COOKIE['auto_login']))) {
-      // Assuming auto_login cookie stores id
-      $id = $_COOKIE['auto_login'];
+session_start();
+if (!isset($_SESSION['id']) && isset($_COOKIE['auto_login'])) {
+    // Assuming auto_login cookie stores id
+    $id = $_COOKIE['auto_login'];
 
-      // Database connection
-      $mysqli = new mysqli("localhost", "root", "", "webass");
+    // Validate or sanitize $id here as necessary
 
-      // Fetch user details from the database
-      $sql = "SELECT * FROM users WHERE id = ?";
-      $stmt = $mysqli->prepare($sql);
-      $stmt->bind_param('i', $id);
-      $stmt->execute();
-      $result = $stmt->get_result();
+    // Database connection
+    $mysqli = new mysqli("localhost", "root", "", "webass");
 
-      if ($row = $result->fetch_assoc()) {
-          // Recreate session variables
-          $_SESSION['id'] = $row['id'];
-          $_SESSION['username'] = $row['username'];
-          $_SESSION['email'] = $row['email'];
+    // Check for a successful database connection
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
 
-          // Optionally refresh the cookie
-          setcookie('auto_login', $row['id'], time() + 86400); // Resets expiration time
-      }
+    // Fetch user details from the database using prepared statements
+    $sql = "SELECT * FROM users WHERE id = ?";
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-      // Close the database connection
-      $mysqli->close();
-  }
+        if ($row = $result->fetch_assoc()) {
+            // Recreate session variables
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['email'] = $row['email'];
+
+            // Optionally refresh the cookie
+            setcookie('auto_login', $row['id'], time() + 86400); // Resets expiration time
+        }
+        $stmt->close();
+    }
+
+    // Close the database connection
+    $mysqli->close();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,54 +56,54 @@
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- custom css -->
-    <link rel = "stylesheet" href = "assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
-    
-    <header class = "header">
-        <nav class = "navbar navbar-expand-lg navbar-light bg-secondary">
+
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
             <div class="container">
-                <a class = "navbar-brand fw-bold fs-2" href = "index.php?page=homepage">
+                <a class="navbar-brand fw-bold fs-2" href="index.php?page=homepage">
                     <span>
-                        <i class = "fa-solid fa-file-invoice"></i>
+                        <i class="fa-solid fa-file-invoice"></i>
                     </span>
-                    <span class = "navbar-brand-text">Create</span> CV
+                    <span class="navbar-brand-text">Create</span> CV
                 </a>
-                <button class = "navbar-toggler" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navbarContent" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class = "collapse navbar-collapse" id = "navbarContent">
-                    <ul class = "navbar-nav ms-auto">
-                        <li class = "nav-item dropdown">
-                            <a class = "nav-link dropdown-toggle text-white fs-18" href = "#" id = "navbarDropdown" role = "button" data-bs-toggle="dropdown" aria-expanded="false">Select Templates</a>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white fs-18" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Select Templates</a>
                             <ul class="dropdown-menu bg-white" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class = "dropdown-item" href = "#printCV">Basic</a>
+                                    <a class="dropdown-item" href="#printCV">Basic</a>
                                 </li>
                                 <li>
-                                    <a class = "dropdown-item" href = "#printCV">College</a>
+                                    <a class="dropdown-item" href="#printCV">College</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-<!-- 
+                    <!-- 
                     <button type = "button" class = "btn btn-login btn-primary ms-lg-4 px-4 fs-18 mt-3 mt-lg-0">Login/Register</button> -->
                     <?php
-                        if(isset($_SESSION['email'])){
+                    if (isset($_SESSION['email'])) {
                     ?>
-                            <a href="#">Welcome, <?php echo $_SESSION['username']; ?></a>
-                            <a type = "button" href="usersCV.php" class = "btn btn-login btn-primary ms-lg-4 px-4 fs-18 mt-3 mt-lg-0">My CV</a>
-                            <a type = "button" href="index.php?page=logout" class = "btn btn-login btn-primary ms-lg-4 px-4 fs-18 mt-3 mt-lg-0">Logout</a>
+                        <a href="#">Welcome, <?php echo $_SESSION['username']; ?></a>
+                        <a type="button" href="usersCV.php" class="btn btn-login btn-primary ms-lg-4 px-4 fs-18 mt-3 mt-lg-0">My CV</a>
+                        <a type="button" href="index.php?page=logout" class="btn btn-login btn-primary ms-lg-4 px-4 fs-18 mt-3 mt-lg-0">Logout</a>
                     <?php
-                        }
-                        else{
+                    } else {
                     ?>
-                            <a  href="index.php?page=login" class = "btn btn-login btn-primary ms-lg-4 px-4 fs-18 mt-3 mt-lg-0">Login/Register</a>
-                        <?php
-                        }
-                        ?>
-                        
+                        <a href="index.php?page=login" class="btn btn-login btn-primary ms-lg-4 px-4 fs-18 mt-3 mt-lg-0">Login/Register</a>
+                    <?php
+                    }
+                    ?>
+
 
                 </div>
             </div>

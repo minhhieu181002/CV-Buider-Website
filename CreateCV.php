@@ -1,5 +1,5 @@
 <?php
-    include'header.php';
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@
         // There is no active session, start a new one
         session_start();
     }
-    
+
 
     // Check if the user is not logged in
     if (!isset($_SESSION['id'])) {
@@ -25,10 +25,10 @@
         exit();
     }
     ?>
-    <div class="container my-5">
-        <h3 class="text-center">Create Resume</h3>
+    <div class="container py-5 rounded">
+        <h3 class="text-center text-white">Create Resume</h3>
         <p class="text-center text-danger fw-bold">Please type in your information</p>
-        <form action="dbcreateCV.php" method="POST" enctype="multipart/form-data" class="border p-3">
+        <form action="dbcreateCV.php" method="POST" enctype="multipart/form-data" class="border p-3 bg-white">
             <div class="mb-3">
                 <label for="name" class="form-label">Resume Name<span class="text-danger">*</span></label>
                 <input type="text" class="form-control form-control-sm" id="name" name="name" required>
@@ -77,8 +77,8 @@
                 <label for="skill" class="form-label">Skill<span class="text-danger">*</span></label>
                 <textarea class="form-control form-control-sm" id="skill" name="skill" rows="4" required></textarea>
             </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-primary btn-sm w-50">Submit</button>
             </div>
         </form>
     </div>
