@@ -5,7 +5,7 @@ $mysqli = new mysqli("localhost", "root", "", "webass");
 
 // Check connection
 if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
+  die("Connection failed: " . $mysqli->connect_error);
 }
 
 // Get the logged-in user's ID
@@ -16,61 +16,60 @@ $stmt->bind_param('i', $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if($result->num_rows > 0){
-    while($row = $result->fetch_assoc()){
-        $nameOfCV = $row['name'];
-        $fullName = $row['full_name'];
-        $dateOfBirth = $row['date_of_birth'];
-        $intro = $row['introduction'];
-        $address = $row['address'];
-        $phone = $row['phone_number'];
-        //$certificate = $row['certificate'];
-        $mail = $row['mail'];
-        $experience = $row['experience'];
-        $education = $row['education'];
-        $skill = $row['skill'];
+if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    $nameOfCV = $row['name'];
+    $fullName = $row['full_name'];
+    $dateOfBirth = $row['date_of_birth'];
+    $intro = $row['introduction'];
+    $address = $row['address'];
+    $phone = $row['phone_number'];
+    //$certificate = $row['certificate'];
+    $mail = $row['mail'];
+    $experience = $row['experience'];
+    $education = $row['education'];
+    $skill = $row['skill'];
 
-        $certificateArr = Array();
-        $skillArr = Array();
-        $education = Array();
-        $expArr = Array();
+    $certificateArr = array();
+    $skillArr = array();
+    $education = array();
+    $expArr = array();
 
-        $linesCertificate = explode("\n", $row['certificate']);
-        
-        // store each line separately
-        $i = 0;
-        foreach ($linesCertificate as $line) {
-                $certificateArr[$i] = $line;
-                //echo "\n$certificateArr[$i]" ;
-                $i+= 1;
-            }
-        $linesSkillArr = explode("\n", $row['skill']);
-        $x = 0;
-        foreach ($linesSkillArr as $line) {
-            $skillArr[$x] = $line;
-            //echo "$skillArr[$x]";
-            $x+= 1;
-        }
+    $linesCertificate = explode("\n", $row['certificate']);
 
-        $linesEducation = explode("\n", $row['education']);
-        $j = 0;
-        foreach ($linesEducation as $line) {
-            $education[$j] = $line;
-            //echo "$education[$j]";
-            $j+= 1;
-        }
-
-        $linesExperience = explode("\n", $row['experience']);
-        $e = 0;
-        foreach ($linesExperience as $line) {
-            $expArr[$e] = $line;
-            //echo "$education[$j]";
-            $e+= 1;
-        }
-        
+    // store each line separately
+    $i = 0;
+    foreach ($linesCertificate as $line) {
+      $certificateArr[$i] = $line;
+      //echo "\n$certificateArr[$i]" ;
+      $i += 1;
     }
+    $linesSkillArr = explode("\n", $row['skill']);
+    $x = 0;
+    foreach ($linesSkillArr as $line) {
+      $skillArr[$x] = $line;
+      //echo "$skillArr[$x]";
+      $x += 1;
+    }
+
+    $linesEducation = explode("\n", $row['education']);
+    $j = 0;
+    foreach ($linesEducation as $line) {
+      $education[$j] = $line;
+      //echo "$education[$j]";
+      $j += 1;
+    }
+
+    $linesExperience = explode("\n", $row['experience']);
+    $e = 0;
+    foreach ($linesExperience as $line) {
+      $expArr[$e] = $line;
+      //echo "$education[$j]";
+      $e += 1;
+    }
+  }
 }
-      
+
 echo "<!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -113,27 +112,26 @@ echo "<!DOCTYPE html>
           $intro
         </div>
         <div class='experience'>
-          <h2>Education</h2>
-  
-          <div class='item'>
-            <h4>Degree and Certificate</h4>
-            <div class='des'>
-              <ul>
-                <li>$certificateArr[0]</li>
-                <li>$certificateArr[1]</li>
-                <li>$certificateArr[2]</li>
-              </ul>
-            </div>
-          </div>
-  
-          
-          <h2 class='skills'>Pofessional Skills</h2>
-          <ul>
-            <li>$skillArr[0]</li>
-            <li>$skillArr[1]</li>
-            <li>$skillArr[2]</li>
-          </ul>
-        </div>
+  <h2>Education</h2>
+  <div class='item'>
+    <h4>Degree and Certificate</h4>
+    <div class='des'>
+      <ul>
+        <li><?php echo isset($certificateArr[0]) ? $certificateArr[0] : ''; ?></li>
+        <li><?php echo isset($certificateArr[1]) ? $certificateArr[1] : ''; ?></li>
+        <li><?php echo isset($certificateArr[2]) ? $certificateArr[2] : ''; ?></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class='skills'>Professional Skills</h2>
+  <ul>
+    <li><?php echo isset($skillArr[0]) ? $skillArr[0] : ''; ?></li>
+    <li><?php echo isset($skillArr[1]) ? $skillArr[1] : ''; ?></li>
+    <li><?php echo isset($skillArr[2]) ? $skillArr[2] : ''; ?></li>
+  </ul>
+</div>
+
         <div class='project'>
           <h2>EXPERIENCE</h2>
           <div class='item'>

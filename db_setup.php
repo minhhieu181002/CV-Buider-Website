@@ -37,6 +37,7 @@ $sql = "CREATE TABLE IF NOT EXISTS resumes (
     userId INT(11) UNSIGNED,
     name VARCHAR(255) NOT NULL,
     full_name VARCHAR(255) NOT NULL,
+    avatar_url TEXT,
     date_of_birth DATE NOT NULL,
     address VARCHAR(255) NOT NULL,
     introduction TEXT,

@@ -30,14 +30,15 @@ $mail = $_POST["mail"];
 $experience = $_POST["experience"];
 $education = $_POST["education"];
 $skill = $_POST["skill"];
+$avatarUrl = isset($_POST['avatar_url']) ? $_POST['avatar_url'] : ''; // Collect avatar URL
 
-// Prepare the SQL statement
-$sql = "INSERT INTO resumes (userId, name, full_name, date_of_birth, address, introduction, phone_number, certificate, mail, experience, education, skill)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+// Prepare the SQL statement to include avatar_url
+$sql = "INSERT INTO resumes (userId, name, full_name, date_of_birth, address, introduction, phone_number, certificate, mail, experience, education, skill, avatar_url)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 // Prepare and bind the SQL statement
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("isssssssssss", $userId, $name, $fullName, $dateOfBirth, $address, $introduction, $phoneNumber, $certificate, $mail, $experience, $education, $skill);
+$stmt->bind_param("issssssssssss", $userId, $name, $fullName, $dateOfBirth, $address, $introduction, $phoneNumber, $certificate, $mail, $experience, $education, $skill, $avatarUrl);
 
 // Execute the statement
 if ($stmt->execute()) {
