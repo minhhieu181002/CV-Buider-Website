@@ -38,15 +38,19 @@ if ($result->num_rows > 0) {
         echo '<h5 class="card-title">Name Of CV: ' . $row['name'] . '</h5>';
         echo '<h6 class="card-subtitle mb-2 text-muted">Full Name: ' . $row['full_name'] . '</h6>';
         echo '<p class="card-text">Email: ' . $row['mail'] . '</p>';
-        echo '<a href="printCV1.php" class="btn btn-primary mr-3">Choose Template 1</a>'; // Add the "Choose Template" button
-        echo '<a href="printCV2.php" class="btn btn-primary">Choose Template 2</a>'; // Add the "Choose Template" button
+        echo '<a href="printCV1.php" class="btn btn-primary " style="margin-right:10px;">Choose Template 1</a>'; // Add the "Choose Template" button
+        echo '<a href="printCV2.php" class="btn btn-primary ml-3">Choose Template 2</a>'; // Add the "Choose Template" button
         echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
     }
 } else {
-    echo '<p>No resumes found for this user.</p>';
+    echo'<div class="container mt-5">';
+
+    echo '<p style="color:white;">No resumes found for this user.</p>';
+
+    echo '</div>';
 }
 
 // Close the database connection

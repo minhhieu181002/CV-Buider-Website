@@ -126,7 +126,7 @@ if($result->num_rows > 0) {
                 </div>
                 <div class='data'>$mail</div>
               </li>
-              <li></li>
+
             </ul>
           </div>
           <div class='resume_item resume_skills'>
@@ -153,6 +153,20 @@ if($result->num_rows > 0) {
         </div>
         <div class='resume_item resume_work'>
           <div class='title'>
+          <p class='bold'>Certificate</p>
+        </div>
+        <ul>
+            <li>
+              <div class='info'>
+                <p class='semi-bold'>$certificate</p>
+                
+              </div>
+            </li>
+            
+            
+          </ul>
+          <div class='resume_item resume_education'>
+          <div class='title'>
             <p class='bold'>Work Experience</p>
           </div>
           <ul>
@@ -174,6 +188,7 @@ if($result->num_rows > 0) {
             </li>
             
           </ul>
+        </div>
         </div>
         <div class='resume_item resume_education'>
           <div class='title'>
