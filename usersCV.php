@@ -31,15 +31,16 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Display each resume in a card
+        echo '<div class="container" style="margin-top:20px">';
         echo '<div class="col-md-4 mb-4">';
         echo '<div class="card border" style="border: 1px solid #ccc;">'; // Add border and scaling
         echo '<div class="card-body">';
-        echo '<h5 class="card-title">Name: ' . $row['name'] . '</h5>';
+        echo '<h5 class="card-title">Name Of CV: ' . $row['name'] . '</h5>';
         echo '<h6 class="card-subtitle mb-2 text-muted">Full Name: ' . $row['full_name'] . '</h6>';
         echo '<p class="card-text">Email: ' . $row['mail'] . '</p>';
         echo '<a href="printCV1.php" class="btn btn-primary">Choose Template 1</a>'; // Add the "Choose Template" button
         echo '<a href="printCV2.php" class="btn btn-primary">Choose Template 2</a>'; // Add the "Choose Template" button
-
+        echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';

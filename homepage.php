@@ -120,7 +120,7 @@ include 'header.php';
         </section>
     </main>
 
-    <footer class="pt-5" style="background-color: gray">
+    <footer class="pt-5" style="background-color:white">
         <div class="container my-4 " ;">
             <div class="row gy-5 gx-md-5 text-center text-md-start">
                 <div class="col-md-6 col-xl-4">
@@ -128,19 +128,19 @@ include 'header.php';
                         <span>
                             <i class="fa-solid fa-file-invoice"></i>
                         </span>
-                        <span class="site-logo-text">Build</span> CV
+                        <span class="site-logo-text" style="color:black">Create</span> CV
                     </a>
                     <p class="text-grey fs-18 mt-4">Build CV is a CV builder that helps users like you to create stunning CVs within 4 minutes</p>
                 </div>
 
                 <div class="col-md-6 col-xl-2">
-                    <h3 class="text-blue">Build CV</h3>
+                    <h3 class="text-blue">Create CV</h3>
                     <ul class="list-unstyled mt-4">
                         <li class="my-2">
                             <a href="#" class="text-decoration-none fs-17 text-dark">Homepage</a>
                         </li>
                         <li class="my-2">
-                            <a href="#" class="text-decoration-none fs-17 text-dark">CV Builder</a>
+                            <a href="#" class="text-decoration-none fs-17 text-dark">CV Create</a>
                         </li>
                         <li class="my-2">
                             <a href="#" class="text-decoration-none fs-17 text-dark">CV Templates</a>
@@ -165,13 +165,13 @@ include 'header.php';
 
                 <div class="col-md-6 col-xl-4">
                     <h3 class="text-blue">Help Center</h3>
-                    <p class="fs-17 mt-3">Contact: <a href="mailto:support@buildcv.com" class="text-decoration-none">support@buildcv.com</a></p>
+                    <p class="fs-17 mt-3">Contact: <a href="mailto:support@createcv.com" class="text-decoration-none">support@createcv.com</a></p>
                 </div>
             </div>
         </div>
 
         <div class="container-fluid copyright-text pt-4 pb-3">
-            <p class="text-center fw-3">&copy; 2023 BuildCv. All rights reserved</p>
+            <p class="text-center fw-3">&copy; 2023 CreateCv. All rights reserved</p>
         </div>
     </footer>
 
