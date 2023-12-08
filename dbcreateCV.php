@@ -29,7 +29,45 @@ $phoneNumber = $_POST["phone_number"];
 $certificate = $_POST["certificate"];
 $mail = $_POST["mail"];
 $skill = $_POST["skill"];
-$avatarUrl = isset($_POST['avatar_url']) ? $_POST['avatar_url'] : ''; // Collect avatar URL
+
+// File upload logic
+$avatarUrl = '';
+if (isset($_FILES['avatar'])) {
+    $file = $_FILES['avatar'];
+    $fileName = $_FILES['avatar']['name'];
+    $fileTmpName = $_FILES['avatar']['tmp_name'];
+    $fileSize = $_FILES['avatar']['size'];
+    $fileError = $_FILES['avatar']['error'];
+
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+    $allowed = array('jpg', 'jpeg', 'png');
+    $uploadDirectory = 'avatar/';
+
+    if (!file_exists($uploadDirectory)) {
+        mkdir($uploadDirectory, 0777, true);
+    }
+
+    if (in_array($fileActualExt, $allowed)) {
+        if ($fileError === 0) {
+            if ($fileSize < 500000) {
+                $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                $fileDestination = $uploadDirectory . $fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
+                $avatarUrl = $fileDestination;
+            } else {
+                echo "Your file is too big!";
+                exit();
+            }
+        } else {
+            echo "There was an error uploading your file!";
+            exit();
+        }
+    } else {
+        echo "You cannot upload files of this type!";
+        exit();
+    }
+}
 
 // Insert resume information
 $sql = "INSERT INTO resumes (userId, name, full_name, date_of_birth, address, introduction, phone_number, certificate, mail, skill, avatar_url)

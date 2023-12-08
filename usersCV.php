@@ -1,5 +1,5 @@
 <?php
-include'header.php';
+include 'header.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -25,13 +25,15 @@ $sql = "SELECT mail, name, full_name FROM resumes WHERE userId = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param('i', $userId);
 $stmt->execute();
-$result = $stmt->get_result(); 
+$result = $stmt->get_result();
 
 // Check if there are any resumes
 if ($result->num_rows > 0) {
+    echo '<div class="container" style="margin-top: 20px;">';
+    echo '<div class="row">'; // Start row
+
     while ($row = $result->fetch_assoc()) {
         // Display each resume in a card
-        echo '<div class="container" style="margin-top:20px">';
         echo '<div class="col-md-4 mb-4">';
         echo '<div class="card border" style="border: 1px solid #ccc;">'; // Add border and scaling
         echo '<div class="card-body">';
@@ -43,13 +45,13 @@ if ($result->num_rows > 0) {
         echo '</div>';
         echo '</div>';
         echo '</div>';
-        echo '</div>';
     }
+
+    echo '</div>'; // End row
+    echo '</div>'; // End container
 } else {
-    echo'<div class="container mt-5">';
-
+    echo '<div class="container mt-5">';
     echo '<p style="color:white;">No resumes found for this user.</p>';
-
     echo '</div>';
 }
 
