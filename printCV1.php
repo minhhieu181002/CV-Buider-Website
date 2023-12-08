@@ -80,7 +80,7 @@ function generateHTML($titles, $descriptions)
 {
   return array_map(function ($title, $description) {
     return "
-      <h3>$title</h3>
+      <p><b> $title</b></p>
       <p>$description</p>
       <br />
     ";
@@ -124,10 +124,13 @@ function generateHTML($titles, $descriptions)
       <h3><?php echo $nameOfCV; ?></h3>
     </div>
 
-    <h2>Introduction</h2>
-    <p> <?php echo $intro; ?></p>
+    <div class="intro">
+      <h2>Introduction</h2>
+      <p> <?php echo $intro; ?></p>
+    </div>
 
     <div class='main'>
+
       <div class='left'>
         <h2>Personal Information</h2>
         <p><strong>Name:</strong> <?php echo $fullName; ?></p>
@@ -140,7 +143,6 @@ function generateHTML($titles, $descriptions)
         </ul>
         <h2>Education</h2>
         <?php
-        // Generate HTML for education using generateHTML function
         $educationHTML = generateHTML($titleEdu, $descriptionEdu);
         echo implode("\n", $educationHTML);
         ?>
@@ -149,7 +151,6 @@ function generateHTML($titles, $descriptions)
       <div class='right'>
         <h2>Work Experience</h2>
         <?php
-        // Generate HTML for work experience using generateHTML function
         $experienceHTML = generateHTML($titleExp, $descriptionExp);
         echo implode("\n", $experienceHTML);
         ?>
