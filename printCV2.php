@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
     $skill = $row['skill'];
     $avt = $row['avatar_url'];
   }
- }
+}
 // echo $avt;
 // echo $fullName;
 //Get data from education table
@@ -43,56 +43,67 @@ $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if($result->num_rows > 0) {
+if ($result->num_rows > 0) {
   $data = array();
   $i = 0;
-  while($row = $result->fetch_assoc()) {
+  while ($row = $result->fetch_assoc()) {
     $data[$i++] = $row;
-}
-}
-  $titleEdu = array();
-  $descriptionEdu = array();
-  for($j = 0;$j < $i;$j++){
-    $titleEdu[$j] = $data[$j]['title'];
-    $descriptionEdu[$j] = $data[$j]['description'];
-    
   }
-  // print_r($title[1]);
-  // print_r($description[1]);
+}
+$titleEdu = array();
+$descriptionEdu = array();
+for ($j = 0; $j < $i; $j++) {
+  $titleEdu[$j] = $data[$j]['title'];
+  $descriptionEdu[$j] = $data[$j]['description'];
+}
+// print_r($title[1]);
+// print_r($description[1]);
 
 
-  //get data from experience table 
-  $sql = "SELECT title, description FROM experience WHERE resume_id = $resume_id";
-  $stmt = $mysqli->prepare($sql);
+//get data from experience table 
+$sql = "SELECT title, description FROM experience WHERE resume_id = $resume_id";
+$stmt = $mysqli->prepare($sql);
 //$stmt->bind_param('i', $resume_id);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  if($result->num_rows > 0) {
-    $data = array();
-    $i = 0;
-    while($row = $result->fetch_assoc()) {
-      $data[$i++] = $row;
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+  $data = array();
+  $i = 0;
+  while ($row = $result->fetch_assoc()) {
+    $data[$i++] = $row;
   }
-  }
-    $titleExp = array();
-    $descriptionExp = array();
-    for($j = 0;$j < $i;$j++){
-      $titleExp[$j] = $data[$j]['title'];
-      $descriptionExp[$j] = $data[$j]['description'];
-      
-    }
+}
+$titleExp = array();
+$descriptionExp = array();
+for ($j = 0; $j < $i; $j++) {
+  $titleExp[$j] = $data[$j]['title'];
+  $descriptionExp[$j] = $data[$j]['description'];
+}
 
-  echo "
+echo "
   <!DOCTYPE html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Document</title>
-    <link rel='stylesheet' type='text/css' href='/Assignment Web/tem4/tem4.css' />
+    <link rel='stylesheet' type='text/css' href='/tem4/tem4.css' />
+    <style>
+    @media print {
+      #printBtn {
+        display: none;
+      }
+    }
+  </style>
   </head>
   <body>
     <script src='https://kit.fontawesome.com/b99e675b6e.js'></script>
+    <script>
+  function printDocument() {
+    window.print();
+    return false;
+  }
+</script>
 
     <div class='resume'>
       <div class='resume_left'>
@@ -215,12 +226,12 @@ if($result->num_rows > 0) {
         </div>
       </div>
     </div>
-    <div class='printCV' style='display:flex; justify-content:center;align-item:center;' > 
-        <a style='padding: 20px 40px; background-color: #547638;text-decoration:none;border-radius:10px;color:#fff;' href=''>Print PDF </a>
-    </div>
+    <div class='printCV' style='display:flex; justify-content:center;align-items:center;' > 
+  <a id='printBtn' style='padding: 20px 40px; background-color: #547638; text-decoration:none; border-radius:10px; color:#fff;' href='#' onclick='printDocument();'>Print PDF</a>
+</div>
+  
   </body>
 </html>
 
   
 ";
-?>
